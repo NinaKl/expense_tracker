@@ -18,3 +18,11 @@ For each year we display the following:
 
 
 ## Example of the end result
+
+![Expenses for the year 2018](expenses_year_2018.png)
+![Expenses for the year 2019](expenses_year_2019.png)
+![Expenses for the year 2020](expenses_year_2020.png)
+![Expenses for the year 2021](expenses_year_2021.png)
+![Expenses for the year 2022](expenses_year_2022.png)
+![Expenses for the year 2023](expenses_year_2023.png)
+
