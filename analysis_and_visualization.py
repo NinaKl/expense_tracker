@@ -25,6 +25,9 @@ for year in grouped_data['Year'].unique():
     
     # Set the background color of the figure
     fig.patch.set_facecolor('white')
+    
+    # Adjust subplot parameters to leave space for axis labels and title
+    plt.subplots_adjust(left=0.1, bottom=0.1, right=0.95, top=0.84, wspace=0.2, hspace=0.2)
 
     # Plot spendings for each month
     sns.barplot(x='Month', y=year_data['Amount'].abs(), hue='Currency', data=year_data[year_data['Type'] == 'Spendings'], ax=ax,errorbar=None)
