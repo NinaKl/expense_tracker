@@ -46,6 +46,9 @@ for year in grouped_data['Year'].unique():
 
     # Create a subplot for each year
     fig, ax = plt.subplots(figsize=(10, 6))
+    
+    # Set the background color of the figure
+    fig.patch.set_facecolor('white')
 
     # Plot spendings for each month
     sns.barplot(x='Month', y=year_data['Amount'].abs(), hue='Currency', data=year_data[year_data['Type'] == 'Spendings'], ax=ax,errorbar=None)

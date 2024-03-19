@@ -4,47 +4,13 @@ import pandas as pd
 import seaborn as sns
 import numpy as np
 
-""" # Connect to your SQLite database
+# Connect to your SQLite database
 conn = sqlite3.connect('spendings.db')
 
 ### spendings   ###
 query_2 = "SELECT * FROM grouped_transactions"
-grouped_data = pd.read_sql_query(query_2, conn) """
+grouped_data = pd.read_sql_query(query_2, conn)
 
-
-
-### CREATE FAKE DATA FOR DEMONSTRATION ###
-
-data_size = 1000
-data = {
-    'Year': np.random.choice([2018,2019,2020, 2021, 2022, 2023], size=data_size),
-    'Month': pd.to_datetime(np.random.choice(pd.date_range('2018-01-01', '2023-12-31', freq='M'), size=data_size)).to_period('M'),
-    'Type': np.random.choice(['Earnings', 'Spendings'], size=data_size),
-    'Currency': np.random.choice(['EUR', 'GBP'], size=data_size),
-    'Amount': np.random.normal(loc=0, scale=100, size=data_size)  # Generate random amounts
-}
-
-# Ensure Spendings have negative amounts
-data['Amount'] = np.where(data['Type'] == 'Spendings', -np.abs(data['Amount']), data['Amount'])
-
-# Create DataFrame
-data_2 = pd.DataFrame(data)
-
-# Convert 'Year' column to string (for an easier compatibility)
-data_2['Year'] = data_2['Year'].astype(str)
-
-# Convert 'Month' column to datetime
-data_2['Month'] = pd.to_datetime(data_2['Month'].astype(str), format='%Y-%m')
-
-# Extract year and month separately
-data_2['Year'] = data_2['Month'].dt.year
-data_2['Month'] = data_2['Month'].dt.month
-
-# Group data by year, month, type, and currency, and sum the amounts for each group
-grouped_data = data_2.groupby(['Year', 'Month', 'Type', 'Currency'])['Amount'].sum().reset_index()
-
-####               ####
-#### end fake data ####
 
 # Filter data for each currency
 eur_data = grouped_data[grouped_data['Currency'] == 'EUR']
@@ -56,6 +22,9 @@ for year in grouped_data['Year'].unique():
 
     # Create a subplot for each year
     fig, ax = plt.subplots(figsize=(10, 6))
+    
+    # Set the background color of the figure
+    fig.patch.set_facecolor('white')
 
     # Plot spendings for each month
     sns.barplot(x='Month', y=year_data['Amount'].abs(), hue='Currency', data=year_data[year_data['Type'] == 'Spendings'], ax=ax,errorbar=None)
