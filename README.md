@@ -16,4 +16,5 @@ For each year we display the following:
 - monthly spending in GBP
 - the total amount earned/spent that year in GBP and EUR
 
-   
+
+## Example of the end result
